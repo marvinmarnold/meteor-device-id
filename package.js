@@ -2,7 +2,7 @@ Package.describe({
   name: 'marvin:device-id',
   version: '0.0.1',
   summary: 'Facilitates anonymous data collection by allowing client to generate random ID and store on device through localStorage + sync w/ server.',
-  git: '',
+  git: 'https://github.com/marvinmarnold/meteor-device-id',
   documentation: 'README.md'
 });
 
