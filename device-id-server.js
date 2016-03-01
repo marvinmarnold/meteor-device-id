@@ -4,8 +4,8 @@ Meteor.methods({
 
     return isClaimed(deviceId)
   },
-  'deviceId/gen': function() {
-    return gen();
+  'deviceId/gen': function(deviceId) {
+    return gen(deviceId)
   },
   'deviceId/store': function(deviceId) {
     check(deviceId, String);
@@ -18,11 +18,9 @@ var isClaimed = function(deviceId) {
   return !!DeviceIds.findOne({deviceId: deviceId})
 }
 
-var gen = function() {
-  var deviceId = Random.id();
-
+var gen = function(deviceId) {
   if(isClaimed(deviceId))
-    return gen();
+    throw new Meteor.Error('device-id-claimed', "DeviceId claimed")
 
   store(deviceId);
   return deviceId;

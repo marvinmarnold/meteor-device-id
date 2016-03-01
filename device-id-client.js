@@ -19,16 +19,21 @@ _.extend(DeviceId, {
   },
 
   gen(callback) {
+    console.log('deviceID gen');
     this.isSet(function(error, isSet) {
+      console.log('deviceID isSet');
+      console.log(isSet);
       if(!isSet) {
-        Meteor.call('deviceId/gen', function(error, deviceId) {
-          if(error)
-            return callback(error);
-
+        console.log('deviceID not set');
+        // Meteor.call('deviceId/gen', function(error, deviceId) {
+        //   if(error)
+        //     return callback(error);
+          var deviceId = Random.id()
           DeviceId.store(deviceId);
           callback(undefined, deviceId);
-        })
+        // })
       } else {
+        console.log('deviceID is set');
         Session.set('device-id-ready', true)
         callback(undefined, DeviceId.get());
       }
