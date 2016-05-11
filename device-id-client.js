@@ -18,6 +18,12 @@ _.extend(DeviceId, {
     window.localStorage.setItem(storedName, deviceId)
   },
 
+  refresh(callback) {
+    Session.set('device-id-ready', false);
+    window.localStorage.removeItem(storedName);
+    DeviceId.gen(callback);
+  },
+
   gen(callback) {
     console.log('deviceID gen');
     this.isSet(function(error, isSet) {
@@ -30,12 +36,16 @@ _.extend(DeviceId, {
         //     return callback(error);
           var deviceId = Random.id()
           DeviceId.store(deviceId);
-          callback(undefined, deviceId);
+
+          if(callback)
+            callback(undefined, deviceId);
         // })
       } else {
         console.log('deviceID is set');
         Session.set('device-id-ready', true)
-        callback(undefined, DeviceId.get());
+
+        if(callback)
+          callback(undefined, DeviceId.get());
       }
     })
   },
