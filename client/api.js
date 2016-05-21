@@ -5,17 +5,27 @@ export function get() {
   return RLS.get(deviceIdKey);
 }
 
-export function gen() {
-  // create random var
-  const deviceId = Random.id();
+export function gen(callback) {
+  if(!get()) {
+    // create random var
+    const deviceId = Random.id();
 
-  // save on server
-  Meteor.call("deviceId.store", deviceId, (error, result) => {
-    if(error) {
-      console.log("error", error);
-    }
-    if(result) {
-      RLS.store(deviceIdKey, deviceId);
-    }
-  });
+    // save on server
+    Meteor.call("deviceId.store", deviceId, (error, result) => {
+      if(error) {
+        console.log("error", error);
+      }
+      if(result) {
+        RLS.store(deviceIdKey, deviceId);
+
+        if(callback)
+          callback(error, result);
+      }
+    });
+  }
+}
+
+export function regen(callback) {
+  RLS.remove(deviceIdKey);
+  gen(callback);
 }

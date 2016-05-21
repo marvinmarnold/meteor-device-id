@@ -1,7 +1,8 @@
 import './reactive-local-store';
-import { get, gen } from './api.js';
+import { get, gen, refresh } from './api.js';
 
-export const Catcher = {
+export const DeviceId = {
   get: get,
-  gen: gen
+  gen: gen,
+  refresh: refresh
 };
