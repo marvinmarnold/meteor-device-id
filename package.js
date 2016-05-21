@@ -7,14 +7,19 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
-  api.use(['ecmascript', 'random', 'mongo', 'underscore', 'check']);
+  api.versionsFrom('1.3.2.4');
+  api.use([
+    'ecmascript',
+    'random',
+    'mongo',
+    'underscore',
+    'check'
+  ]);
 
-  api.addFiles('device-id.js');
-  api.addFiles('device-id-server.js', 'server');
-  api.addFiles('device-id-client.js', 'client');
+  api.use('marvin:reactive-local-store@0.0.1');
 
-  api.export('DeviceId')
+  api.addFiles('client/main.js', 'client');
+  api.addFiles('server/main.js', 'server');
 });
 
 Package.onTest(function(api) {
