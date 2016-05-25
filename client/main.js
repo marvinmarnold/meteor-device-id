@@ -1,8 +1,8 @@
 import './reactive-local-store';
-import { get, gen, refresh } from './api.js';
+import { get, gen, regen } from './api.js';
 
 export const DeviceId = {
   get: get,
   gen: gen,
-  refresh: refresh
+  regen: regen
 };
