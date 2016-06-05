@@ -6,12 +6,15 @@ export function get() {
 }
 
 export function gen(callback) {
+  console.log('gen');
   if(!get()) {
+    console.log('!get');
     // create random var
     const deviceId = Random.id();
 
     // save on server
     Meteor.call("deviceId.store", deviceId, (error, result) => {
+      console.log('deviceId.store');
       if(error) {
         console.log("error", error);
       }
