@@ -19,8 +19,7 @@ Package.onUse(function(api) {
   api.use('marvin:reactive-local-store@0.0.1');
 
   api.addFiles('server/main.js', 'server');
-
-  api.mainModule('client/main.js', 'client');
+  api.mainModule('client/main.js', 'web');
 });
 
 Package.onTest(function(api) {
